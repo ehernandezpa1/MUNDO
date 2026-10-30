@@ -37,6 +37,23 @@ body.gn #gn{display:flex}
 #gn .gt{font-weight:200;font-size:clamp(24px,6.5vw,38px);letter-spacing:.12em;margin-top:26px;animation-delay:2.4s}
 #gn .gd{color:var(--dim);font-size:clamp(14px,3.8vw,18px);margin-top:8px;animation-delay:2.9s}
 #gn .ge{color:var(--ok);font-size:clamp(14px,3.8vw,17px);margin-top:14px;animation-delay:3.4s}
+#star{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);z-index:8;width:44px;height:44px;padding:0;display:flex;align-items:center;justify-content:center;border:0;background:transparent;color:var(--ok);font-size:28px;line-height:1;text-shadow:0 0 10px var(--ok),0 0 22px var(--ok);animation:starglow 1.8s ease-in-out infinite}
+@keyframes starglow{0%,100%{opacity:.75;text-shadow:0 0 6px var(--ok)}50%{opacity:1;text-shadow:0 0 12px var(--ok),0 0 26px var(--ok)}}
+#starbar{position:fixed;top:calc(60px + env(safe-area-inset-top,0px));left:16px;right:16px;max-width:420px;margin:0 auto;z-index:8;animation:cin .35s cubic-bezier(.2,1.2,.4,1) both}
+#starbar .cta{margin:0;background:rgba(14,40,34,.82)}
+body.dm #starbar .cta{background:rgba(232,250,244,.95)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+#dayend{margin:26px 0 0;text-align:center;color:var(--dim);font-size:12px;line-height:1.5;opacity:.9}
+body.nd #app,body.nd #rail,body.nd #dev,body.nd #notepad{opacity:0!important;filter:blur(8px);transform:translateY(-14px) scale(.985)!important;pointer-events:none!important;transition:opacity 1.6s ease,filter 1.6s ease,transform 1.6s ease}
+#nd{position:fixed;inset:0;z-index:60;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 20px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+body.nd #nd{display:flex}
+#nd b{font-weight:200;font-size:clamp(40px,11vw,84px);letter-spacing:.14em;color:var(--tx);opacity:0;animation:gnin 2.2s ease 1.5s forwards}
+#nd small{position:absolute;bottom:calc(36px + env(safe-area-inset-bottom,0px));color:var(--dim);font-size:13px;opacity:0;animation:gnin 1.5s ease 5s forwards}
+#nd .gt,#nd .gd,#nd .ge{opacity:0;animation:gnin 1.6s ease forwards}
+#nd .gt{font-weight:200;font-size:clamp(24px,6.5vw,38px);letter-spacing:.12em;margin-top:26px;animation-delay:2.4s}
+#nd .gd{color:var(--dim);font-size:clamp(14px,3.8vw,18px);margin-top:8px;animation-delay:2.9s}
+#nd .ge{color:var(--ok);font-size:clamp(14px,3.8vw,17px);margin-top:14px;animation-delay:3.4s}
+@media (prefers-reduced-motion:reduce){body.nd #app,body.nd #rail,body.nd #dev,body.nd #notepad{filter:none;transform:none!important;transition-duration:.4s}#nd b{animation-delay:.4s}}
 @keyframes gnin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){body.gn #app,body.gn #rail,body.gn #dev,body.gn #notepad{filter:none;transform:none!important;transition-duration:.4s}#gn b{animation-delay:.4s}}
 #app{max-width:560px;margin:0 auto;padding:28px 18px 80px}
@@ -63,7 +80,7 @@ button{cursor:pointer}
 .cta>span:last-child{font-size:26px;color:var(--ok)}
 @keyframes nx{0%,100%{box-shadow:0 0 0 0 rgba(142,227,200,.45)}50%{box-shadow:0 0 24px 2px rgba(142,227,200,.35)}}
 @keyframes cin{from{opacity:0;transform:translateY(-8px) scale(.97)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){.item.next,.rn.next,.cta{animation:none}}
+@media (prefers-reduced-motion:reduce){.item.next,.rn.next,.cta,#star{animation:none}}
 
 .back{background:none;border:0;color:var(--dim);padding:6px 0;margin-bottom:6px;font-size:14px}
 .row{display:flex;align-items:center;gap:12px;padding:12px 4px;border-bottom:1px solid rgba(255,255,255,.07)}
@@ -103,7 +120,7 @@ textarea{min-height:240px;resize:vertical;font-family:ui-monospace,Menlo,monospa
 .bal{font-size:38px;font-weight:200;margin:0}
 .neg{color:#ff9db1}.pos{color:var(--ok)}
 #dev{position:fixed;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:5;display:flex;flex-direction:column-reverse;align-items:flex-end;gap:6px}
-.devp{margin:0;display:flex;flex-direction:column;gap:6px}
+.devp{margin:0;display:flex;flex-direction:column;gap:6px;max-height:calc(100vh - 90px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));max-height:calc(100dvh - 90px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y}
 #notepad{position:fixed;left:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:6;display:flex;flex-direction:column-reverse;align-items:flex-start;gap:6px}
 .npp{margin:0;width:min(400px,calc(100vw - 24px));max-height:66vh;overflow:auto}
 .tb{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
@@ -241,7 +258,8 @@ body.wide #app.v-list .pl{grid-column:2}
 body:not(.wide) .back.tomenu{display:none}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style></head><body>
-<canvas id="sky"></canvas><div id="rail"></div><div id="app"></div><div id="dev"></div><div id="notepad"></div><div id="lb"></div><div id="gn"><b>Goodnight</b><div class="gt" id="gnt"></div><div class="gd" id="gnd"></div><div class="ge" id="gne"></div><small>Tap to return</small></div>
+<canvas id="sky"></canvas><div id="rail"></div><div id="app"></div><div id="dev"></div><div id="notepad"></div><div id="lb"></div><div id="nd"><b>New Day</b><div class="gt" id="ndt"></div><div class="gd" id="ndd"></div><div class="ge" id="nde"></div><small>Tap to begin</small></div>
+<div id="gn"><b>Goodnight</b><div class="gt" id="gnt"></div><div class="gd" id="gnd"></div><div class="ge" id="gne"></div><small>Tap to return</small></div>
 <script>
 (function(){const c=document.getElementById('sky'),x=c.getContext('2d');let st=[];
 function fit(){c.width=innerWidth;c.height=innerHeight;st=Array.from({length:Math.round(innerWidth*innerHeight/6000)},()=>({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.2+.2,p:Math.random()*6}))}
@@ -250,8 +268,12 @@ if(!matchMedia('(prefers-reduced-motion:reduce)').matches)requestAnimationFrame(
 fit();addEventListener('resize',fit);requestAnimationFrame(draw)})();
 
 const K='mundo.v1',uid=()=>Math.random().toString(36).slice(2,8),pad=n=>String(n).padStart(2,'0');
-const dk=(d=new Date())=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
-function wk(d=new Date()){const t=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())),n=t.getUTCDay()||7;t.setUTCDate(t.getUTCDate()+4-n);const y=t.getUTCFullYear();return y+'-W'+pad(Math.ceil(((t-Date.UTC(y,0,1))/864e5+1)/7))}
+const NOW=()=>new Date(Date.now()+((typeof S!=='undefined'&&S&&S.simOff)||0)*864e5);
+const fmtK=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+const rk=()=>fmtK(NOW());
+const dk=d=>d?fmtK(d):((typeof S!=='undefined'&&S&&S.activeDay)||rk());
+const adate=()=>{const [y,m,d]=dk().split('-').map(Number);return new Date(y,m-1,d,NOW().getHours(),NOW().getMinutes())};
+function wk(d=adate()){const t=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())),n=t.getUTCDay()||7;t.setUTCDate(t.getUTCDate()+4-n);const y=t.getUTCFullYear();return y+'-W'+pad(Math.ceil(((t-Date.UTC(y,0,1))/864e5+1)/7))}
 const mk=()=>dk().slice(0,7),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const slug=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 const $=s=>document.querySelector(s);
@@ -266,11 +288,11 @@ function fix(){const d={home:{name:'Home',reward:'Free time to relax',tasks:[{id
 sleep:{name:'Sleep',reward:'Read for 10 minutes',tasks:[{id:uid(),t:'Wash face and brush teeth'},{id:uid(),t:'Prepare tomorrow'},{id:uid(),t:'Set the alarm'}]}};
 ['home','sleep'].forEach(k=>{if(!S.lists[k])S.lists[k]=d[k]})}
 let S;try{S=JSON.parse(localStorage.getItem(K))}catch(e){}
-if(!S||!S.lists)S=seed();fix();
+if(!S||!S.lists)S=seed();fix();if(!S.activeDay)S.activeDay=rk();
 const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
 let V={v:'menu'},bibSel=null,GAL=[],TH={},lbI=null,bibCat='All',gT=null,roomDay=dk(),taskOpen=false,rewOpen=false,roomOpen=false,addDays=[],lobTab='day',jv={file:null},msg='',devOpen=false;
 const forced=()=>['morning','workout'].find(k=>!lst(k).complete);
-let calY=new Date().getFullYear(),calM=new Date().getMonth(),calSel=dk(),held=null,btext='',wmode=false;
+let calY=adate().getFullYear(),calM=adate().getMonth(),calSel=dk(),held=null,btext='',wmode=false;
 function weekOf(k){const [y,m,d]=k.split('-').map(Number),b=new Date(y,m-1,d);b.setDate(b.getDate()-((b.getDay()+6)%7));return Array.from({length:7},(_,i)=>{const x=new Date(b);x.setDate(b.getDate()+i);return x})}
 function burst(name,days){const old=document.getElementById('burst');if(old)old.remove();const o=document.createElement('div');o.id='burst';
 o.innerHTML='<div class="bw"><div class="brow">'+days.map((x,i)=>`<div class="bd" style="--d:${(i*.22).toFixed(2)}s"><small>${'SMTWTFS'[x.getDay()]}</small><b>${x.getDate()}</b><i></i>${[0,45,90,135,180,225,270,315].map(a=>`<u style="--a:${a}deg"></u>`).join('')}</div>`).join('')+'</div><div class="bt">'+esc(name)+' is booked for the week</div></div>';
@@ -282,7 +304,7 @@ const theme=()=>Object.assign({},TD,(S.themes||{})[stageKey()]);
 const dm=()=>S.devMode!==false;
 function applyTheme(){const t=theme();document.body.classList.toggle('dm',dm());document.body.classList.toggle('wide',S.ui==='wide'||(S.ui!=='phone'&&innerWidth>=900));for(const k in t)document.body.style.setProperty('--'+k,t[k]);document.documentElement.style.background=dm()?'#fff':t.bg}
 const D=()=>S.done[dk()]||(S.done[dk()]={});
-const todayTasks=L=>L.tasks.filter(t=>!t.days||!t.days.length||t.days.includes(new Date().getDay()));
+const todayTasks=L=>L.tasks.filter(t=>!t.days||!t.days.length||t.days.includes(adate().getDay()));
 function lst(k){const L=S.lists[k],main=todayTasks(L),n=main.filter(t=>D()[t.id]).length,open=n===main.length,rd=!!D()[k+'_r'];
 return{L,main,n,open,rd,count:n+(rd?1:0),total:main.length+1,complete:open&&rd}}
 const unlocked=()=>lst('morning').complete&&lst('workout').complete;
@@ -390,15 +412,23 @@ jday(f){V={v:'journal'};jv.file=f;render()},
 dev(){devOpen=!devOpen;render()},
 resettheme(){if(S.themes)delete S.themes[stageKey()];save();render()},
 themeall(){const t=theme();S.themes=S.themes||{};['menu','morning','workout','home','sleep','focus','lobby','journal','money',...S.projects.map(p=>'room:'+p.id)].forEach(k=>S.themes[k]=Object.assign({},t));save();render()},
+simreal(i,j,el){if(!el||!el.value)return;const [y,m,d]=el.value.split('-').map(Number),n=new Date(),base=new Date(n.getFullYear(),n.getMonth(),n.getDate());S.simOff=Math.round((new Date(y,m-1,d)-base)/864e5);save();if(!tryAdvance())render()},
+simyour(i,j,el){if(!el||!el.value)return;S.activeDay=el.value;save();wasEnded=null;roomDay=dk();calSel=dk();const a=adate();calY=a.getFullYear();calM=a.getMonth();V={v:'menu'};msg='';render()},
+ndprev(){devOpen=false;render();showNd()},
+star(){starOpen=!starOpen;render()},
+simday(i){i=+i;S.simOff=i===0?0:(S.simOff||0)+i;save();if(!tryAdvance())render()},
 restart(){delete S.done[dk()];save();msg='Day restarted.';V={v:'menu'};render()},
 skipall(){const d=D();['morning','workout','home','sleep'].forEach(k=>{lst(k).main.forEach(t=>d[t.id]=true);d[k+'_r']=true});d.focus=true;save();render()},
 hint(i,j){msg=homeBusy()?'Finish Home (and its reward) to unlock everything again.':(j==='sleep'&&lobbyOpen()&&lst('home').complete)?'Visit the Lobby again to unlock Sleep.':(j==='sleep'&&lobbyOpen())?'Finish Home (and its reward) to unlock Sleep.':(j==='home'||j==='sleep')&&unlocked()?'Finish your Focus session to unlock Home and Sleep.':['lobby','journal','money'].includes(i)&&unlocked()?'Finish your Focus session to unlock the Lobby.':'Finish Morning and Workout (and their rewards) to unlock.';render()},
-finishfocus(){D().focus=true;save();msg='Focus session finished. Lobby unlocked.';render()}};
+ftoggle(){ftOpen=!ftOpen;render();if(ftOpen)setTimeout(()=>{const e=$('#ft-in');e&&e.focus()},0)},
+ftadd(){const e=$('#ft-in');if(e)add('ftask','',e.value);setTimeout(()=>{const e=$('#ft-in');e&&e.focus()},0)},
+finishfocus(){if([...S.projects.filter(bookedToday).flatMap(p=>PT(p)),...((S.dayTasks||{})[dk()]||[])].some(t=>!t.done))return;D().focus=true;save();msg='Focus session finished. Lobby unlocked.';render()}};
 function moneyAdd(sign){const a=parseFloat($('#m-a').value);if(!a)return;S.money.unshift({id:uid(),d:dk(),a:sign*Math.abs(a),n:$('#m-n').value.trim()||(sign>0?'Income':'Expense')});save();render()}
 function add(kind,id,v){v=v.trim();if(!v)return;
 if(kind==='task'){S.lists[id].tasks.push({id:uid(),t:v,days:id==='workout'?[...addDays]:[]})}
 else if(kind==='ptask'){const p=P(id);bk(p);PT(p);p.byDate=p.byDate||{};(p.byDate[roomDay]=p.byDate[roomDay]||[]).push({id:uid(),t:v})}
 else if(kind==='stage'){P(id).stages.push({n:v});bk(P(id))}
+else if(kind==='ftask'){S.dayTasks=S.dayTasks||{};S.dayTasks[dk()]=[...(S.dayTasks[dk()]||[]),{id:uid(),t:v,done:false}]}
 else if(kind==='dtask'){S.dayTasks=S.dayTasks||{};S.dayTasks[calSel]=[...(S.dayTasks[calSel]||[]),{id:uid(),t:v,done:false}]}
 else if(kind==='reward')S.lists[id].reward=v;
 save();render()}
@@ -417,13 +447,13 @@ if(t.id==='jt'){S.files[jv.file]=t.value;save()}
 if(t.dataset.cx){const en=P(t.dataset.cx).codex.find(x=>x.id===t.dataset.id);en.body=t.value;bk(P(t.dataset.cx));save()}
 if(t.dataset.cxn){const en=P(t.dataset.cxn).codex.find(x=>x.id===t.dataset.id);en.name=t.value;bk(P(t.dataset.cxn));const bl=document.querySelector('#bl-'+t.dataset.id+' .bnm');if(bl)bl.textContent=t.value||'Untitled';save()}});
 
-const clkT=()=>new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}),clkD=()=>new Date().toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'});
+const clkT=()=>NOW().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}),clkD=()=>NOW().toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'});
 const clk=(c='')=>`<div class="clk ${c}"><b>${clkT()}</b><small>${clkD()}</small></div>`;
-setInterval(()=>{const t=clkT(),d=clkD();document.querySelectorAll('.clk').forEach(c=>{if(c.firstChild.textContent!==t)c.firstChild.textContent=t;if(c.lastChild.textContent!==d)c.lastChild.textContent=d})},1000);
+setInterval(()=>{if(behind()&&dayEnded()&&!document.body.classList.contains('gn')){tryAdvance();return}if(behind()&&!dayEnded()&&!$('#dayend')){render();return}const t=clkT(),d=clkD();document.querySelectorAll('.clk').forEach(c=>{if(c.firstChild.textContent!==t)c.firstChild.textContent=t;if(c.lastChild.textContent!==d)c.lastChild.textContent=d})},1000);
 const back=(to='menu',l='Menu')=>`<button class="back${to==='menu'?' tomenu':''}" data-a="go" data-i="${to}">‹ ${l}</button>`;
 const chk=(on,a,i,j)=>`<button class="chk" data-a="${a}" data-i="${i}" data-j="${j||''}" aria-label="toggle">${on?'✓':''}</button>`;
 const toast=()=>`<div class="toast">${esc(msg)}</div>`;
-const today=()=>new Date().toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'});
+const today=()=>adate().toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'});
 
 function menu(){const m=lst('morning'),w=lst('workout'),u=unlocked(),ho=lst('home'),sl=lst('sleep'),lo=lobbyOpen(),so=sleepOpen();
 const nx=nextUp(),it=(i,name,sub,lock,j)=>{const key=j||i,isn=!lock&&key===nx&&!dayEnded(),un=isn&&!['morning','workout'].includes(key);return`<button class="item ${lock?'lock':''} ${isn?'next':''}" data-a="${lock?'hint':'go'}" data-i="${i}" data-j="${j||''}"><span>${name}<small>${un?'Unlocked · tap to continue':sub}</small></span><span>${lock?'🔒':isn?'Next ›':'›'}</span></button>`};
@@ -439,10 +469,11 @@ return clk()+(forced()||homeBusy()?'':back())+`<h2>${L.name}</h2><p class="sub">
 ${taskOpen?`${k==='workout'?`<p class="sub" style="margin:10px 0 0">New routine runs on (none = every day):</p><div class="chips">${[0,1,2,3,4,5,6].map(i=>`<button class="chip ${addDays.includes(i)?'on':''}" data-a="day" data-i="${i}">${wd[i]}</button>`).join('')}</div>`:''}<input id="addt" style="margin-top:8px" placeholder="Add a task, press Enter" data-add="task" data-i="${k}">`:''}
 ${rewOpen?`<input id="addr" style="margin-top:8px" placeholder="Change reward task, press Enter" data-add="reward" data-i="${k}">`:''}
 ${fin}</div></div>`}
-function focus(){const fp=S.projects.filter(bookedToday),dt=(S.dayTasks||{})[dk()]||[],g=kind=>fp.filter(p=>p.kind===kind).map(p=>`<button class="item" data-a="go" data-i="room" data-j="${p.id}" data-k="focus"><span>${esc(p.icon)}&nbsp; ${esc(p.name)}<small>${esc(p.stages[cur(p)]?.n||'')} · tasks ${prog(p)}</small></span><span>›</span></button>`).join('')||'<p class="sub">None booked today. Book a room in the Lobby.</p>';
-return back()+`<h2>Focus</h2><div class="split"><div class="pr"><h3>Projects</h3>${g('project')}<h3>Studies</h3>${g('study')}${dt.length?`<h3>Today</h3><div class="glass">${dt.map(t=>`<div class="row ${t.done?'done':''}">${chk(t.done,'ttog',t.id)}<span class="t">${esc(t.t)}</span></div>`).join('')}</div>`:''}</div><div class="pl"><h3>Session</h3><div class="glass">${fp.length} rooms today · ${fp.reduce((a,p)=>a+PT(p).filter(t=>t.done).length,0)} of ${fp.reduce((a,p)=>a+PT(p).length,0)} tasks done</div><div class="glass">${D().focus?'Focus session finished.'+cta('lobby'):'Done focusing? Finish the session to unlock the Lobby.<div class="bar"><button class="btn" data-a="finishfocus">Finish focus session</button></div>'}</div>${toast()}</div></div>`}
+let ftOpen=false;
+function focus(){const fp=S.projects.filter(bookedToday),dt=(S.dayTasks||{})[dk()]||[],left=[...fp.flatMap(p=>PT(p)),...dt].filter(t=>!t.done).length,g=kind=>fp.filter(p=>p.kind===kind).map(p=>`<button class="item" data-a="go" data-i="room" data-j="${p.id}" data-k="focus"><span>${esc(p.icon)}&nbsp; ${esc(p.name)}<small>${esc(p.stages[cur(p)]?.n||'')} · tasks ${prog(p)}</small></span><span>›</span></button>`).join('')||'<p class="sub">None booked today. Book a room in the Lobby.</p>';
+return back()+`<h2>Focus</h2><div class="split"><div class="pr"><h3>Projects</h3>${g('project')}<h3>Studies</h3>${g('study')}<h3>Today</h3>${dt.length?`<div class="glass">${dt.map(t=>`<div class="row ${t.done?'done':''}">${chk(t.done,'ttog',t.id)}<span class="t">${esc(t.t)}</span></div>`).join('')}</div>`:''}${ftOpen?`<div class="glass"><input id="ft-in" data-add="ftask" placeholder="New task for today" style="width:100%"><div class="bar"><button class="btn" data-a="ftadd">Add</button><button class="btn g" data-a="ftoggle">Cancel</button></div></div>`:`<button class="btn g" data-a="ftoggle">+ Add day task</button>`}</div><div class="pl"><h3>Session</h3><div class="glass">${fp.length} rooms today · ${fp.reduce((a,p)=>a+PT(p).filter(t=>t.done).length,0)} of ${fp.reduce((a,p)=>a+PT(p).length,0)} tasks done</div><div class="glass">${D().focus?'Focus session finished.'+cta('lobby'):'Done focusing? Finish the session to unlock the Lobby.<div class="bar"><button class="btn" data-a="finishfocus"'+(left?' disabled':'')+'>Finish focus session</button></div>'+(left?'<p class="sub" style="margin:8px 0 0">Check all tasks to unlock this ('+left+' left).</p>':'')}</div>${toast()}</div></div>`}
 
-function room(id,from){const p=P(id);if(!p)return back();const ed=from==='lobby',c=cur(p),[ry,rm,rdd]=roomDay.split('-').map(Number),rd=new Date(ry,rm-1,rdd),tn=new Date(),df=Math.round((rd-new Date(tn.getFullYear(),tn.getMonth(),tn.getDate()))/864e5),rel=df===0?'Today':df===1?'Tomorrow':df===-1?'Yesterday':'',booked=(p.dates||[]).includes(roomDay);
+function room(id,from){const p=P(id);if(!p)return back();const ed=from==='lobby',c=cur(p),[ry,rm,rdd]=roomDay.split('-').map(Number),rd=new Date(ry,rm-1,rdd),tn=adate(),df=Math.round((rd-new Date(tn.getFullYear(),tn.getMonth(),tn.getDate()))/864e5),rel=df===0?'Today':df===1?'Tomorrow':df===-1?'Yesterday':'',booked=(p.dates||[]).includes(roomDay);
 const dayBar=`<div class="glass"><div class="row" style="border:0;padding:0"><button class="x" data-a="rday" data-i="-1" aria-label="Previous day">‹</button><span class="t" style="text-align:center"><b>Editing ${rd.toLocaleDateString(undefined,{weekday:'long'})}</b><small style="display:block;color:var(--dim)">${rd.toLocaleDateString(undefined,{month:'long',day:'numeric',year:'numeric'})}${rel?' · '+rel:''}</small></span><button class="x" data-a="rday" data-i="1" aria-label="Next day">›</button></div><div class="bar" style="margin-top:8px"><input type="date" value="${roomDay}" data-a="rdate" aria-label="Pick a date">${roomDay!==dk()?'<button class="btn g" data-a="rtoday">Today</button>':''}</div><button class="chip ${booked?'on':''}" data-a="rbook" data-i="${id}" style="margin-top:8px">${booked?'✓ Booked this day':'Book this day'}</button></div>`;
 return back(from,from==='lobby'?'Lobby':'Focus')+`<h2>${esc(p.icon)} ${esc(p.name)}</h2><p class="sub">${p.kind==='study'?'Study plan':'Pipeline'}</p>
 <div class="split"><div class="pl"><div class="glass"><div class="map">${p.stages.map((s,i)=>`<button class="node ${s.done?'d':''} ${i===c&&!s.done?'c':''}" data-a="stage" data-i="${id}" data-j="${i}">${esc(s.n)}</button>`).join('<span class="ln"></span>')}</div>
@@ -470,11 +501,13 @@ return`<div class="glass"><div class="row" style="border:0;padding:0 0 8px"><but
 <h3 style="margin-top:14px">Day list</h3>${((S.dayTasks||{})[calSel]||[]).map(t=>`<div class="row ${t.done?'done':''}">${chk(t.done,'dtog',t.id)}<span class="t">${esc(t.t)}</span><button class="x" data-a="ddel" data-i="${t.id}">×</button></div>`).join('')}<input placeholder="Add a task to this day, press Enter" data-add="dtask" data-i="x">
 <p class="sub" style="margin:10px 0 0">${hp?'Use the + beside a week to book or remove '+esc(hp.name)+' for that whole week.':'Pick a room, then use the + beside a week to book it.'}</p><div class="chips">${S.projects.map(p=>`<button class="chip ${held===p.id?'on':''}" data-a="hold" data-i="${p.id}">${esc(p.name)}</button>`).join('')}</div>
 ${hp?`<button class="btn g" data-a="dayplace">${(hp.dates||[]).includes(calSel)?'Remove':'Book'} ${esc(hp.name)} on ${calSel}</button> `:''}${S.files[jf]?`<button class="btn g" data-a="jday" data-i="${jf}">Open journal for this day</button>`:''}</div>`}
-function lobby(){const sc=lobTab,h=new Date().getHours(),gr=h<12?'Good morning':h<18?'Good afternoon':'Good evening';
+let starOpen=false;
+const starHtml=()=>{const k=nextUp();if(!['home','sleep'].includes(k))return'';return`<button id="star" data-a="star" aria-label="Next stage unlocked">✦</button>`+(starOpen?`<div id="starbar">${cta(k)}</div>`:'')};
+function lobby(){const sc=lobTab,h=NOW().getHours(),gr=h<12?'Good morning':h<18?'Good afternoon':'Good evening';
 const lit=bookedToday;
 const rooms=S.projects.filter(p=>p.sched.includes(sc)||(sc==='day'&&(p.dates||[]).includes(dk())));
 const door=p=>`<button class="door ${lit(p)?'lit':''}" data-a="go" data-i="room" data-j="${p.id}" data-k="lobby"><span class="dico">${esc(p.icon)}</span><b>${esc(p.name)}</b><small>${esc(p.stages[cur(p)]?.n||'')} · ${prog(p)}</small><em>${p.app==='codex'?'codex':p.app==='journal'?'journal':p.kind}</em></button>`;
-return back()+(['home','sleep'].includes(nextUp())?cta(nextUp()):'')+`<div class="lhead"><div><h2>The Lobby</h2><p class="sub">${gr}. Lit doors are booked for today.</p></div>${clk('r')}</div>
+return back()+starHtml()+`<div class="lhead"><div><h2>The Lobby</h2><p class="sub">${gr}. Lit doors are booked for today.</p></div>${clk('r')}</div>
 <div class="lob"><div class="mid">${clk('m')}<p class="sub wd" style="text-align:center">${gr}.</p><div class="rc"><h3>Calendar</h3>${cal()}</div></div>
 <div class="rgt"><div class="lc"><h3>The hall</h3><p class="sub wd" style="margin:0 0 6px">Lit doors are booked for today.</p><div class="roof wd"></div><div class="hall">${S.projects.map(door).join('')}<button class="door ghost" data-a="newroom" aria-label="${roomOpen?'Close new room':'New room'}" aria-expanded="${roomOpen}">${roomOpen?'×':'+'}<small>${roomOpen?'Close':'New room'}</small></button>${roomOpen?`<div class="glass" style="grid-column:1/-1;margin:0"><input id="np-n" placeholder="Name"><div class="bar"><select id="np-k"><option value="project">Project</option><option value="study">Study</option></select><select id="np-a"><option value="journal">Journal app</option><option value="codex">World bible codex</option><option value="none">No app</option></select></div><button class="btn" data-a="create">Create room</button></div>`:''}</div></div>
 <div class="sc"><h3>Stations</h3><div class="stations"><button class="card" data-a="go" data-i="journal">&#9998;<small>Journal</small></button><button class="card" data-a="go" data-i="bible">&#9672;<small>World Bible</small></button><button class="card" data-a="go" data-i="money">&curren;<small>Money</small></button><button class="card" data-a="go" data-i="backup">&#10226;<small>Backup</small></button></div></div>
@@ -542,14 +575,20 @@ return `<div class="bcols"><div class="bmid"><div class="bhead">${back('lobby','
 <h3>Gallery · ${GAL.length}</h3><div id="bdrop"><p class="sub" style="margin:0 0 10px">Drop images here, or</p><label class="btn">Add images<input id="bfile" type="file" accept="image/*" multiple hidden></label></div>
 ${GAL.length?`<div class="gal">${GAL.map((g,i)=>`<button class="gi" data-a="glb" data-i="${i}" aria-label="Open ${esc(g.cap||g.name)}"><img src="${g.url}" alt="${esc(g.cap||g.name)}"><span>${esc(g.cap||g.name)}</span></button>`).join('')}</div>`:''}${toast()}</div></div>`}
 let wasEnded=null,gnT=null,gnDay='';
-function fillGn(){const n=new Date(),[y,m,d]=gnDay.split('-').map(Number),e=new Date(y,m-1,d);$('#gnt').textContent=n.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});$('#gnd').textContent=n.toLocaleDateString([],{weekday:'long',year:'numeric',month:'long',day:'numeric'});$('#gne').textContent=e.toLocaleDateString([],{weekday:'long'})+' ended'}
+function fillGn(){const n=NOW(),[y,m,d]=gnDay.split('-').map(Number),e=new Date(y,m-1,d);$('#gnt').textContent=n.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});$('#gnd').textContent=n.toLocaleDateString([],{weekday:'long',year:'numeric',month:'long',day:'numeric'});$('#gne').textContent=e.toLocaleDateString([],{weekday:'long'})+' ended'}
 function checkEnd(){const e=dayEnded();if(wasEnded===false&&e){gnDay=dk();fillGn();document.body.classList.add('gn');clearInterval(gnT);gnT=setInterval(()=>{if(!document.body.classList.contains('gn')){clearInterval(gnT);return}fillGn()},1000)}if(!e)document.body.classList.remove('gn');wasEnded=e}
-function render(){let h;const y=scrollY;const f=forced();if(f&&V.v!=='backup'&&!(V.v==='list'&&(V.id===f||lst(V.id).complete)))V={v:'list',id:f};if(homeBusy()&&V.v!=='backup'&&!(V.v==='list'&&V.id==='home'))V={v:'list',id:'home'};const {v,id,from}=V;
-$('#dev').innerHTML='<button class="chip" data-a="dev">Dev</button>'+(devOpen?'<div class="glass devp"><button class="chip '+(dm()?'on':'')+'" data-a="devmode">Developer mode: '+(dm()?'On':'Off')+'</button><div class="sub" style="margin:0">'+(dm()?'Plain white, no stars. Turn off to use the stage backgrounds.':'')+'</div><div class="sub" style="margin:0">Background for this stage: '+esc(stageName())+'</div><div class="bar" style="margin:0">'+[['c1','Glow 1'],['c2','Glow 2'],['c3','Glow 3'],['bg','Base']].map(([k,n])=>`<label class="pill" style="display:grid;gap:4px;justify-items:center">${n}<input type="color" data-th="${k}" value="${theme()[k]}" style="width:48px;height:34px;padding:2px"></label>`).join('')+'</div><div class="sub" style="margin:0">Layout</div><div class="chips" style="margin:0">'+[['auto','Auto'],['phone','Phone'],['wide','iPad / PC']].map(([k,n])=>'<button class="chip '+((S.ui||'auto')===k?'on':'')+'" data-a="ui" data-i="'+k+'">'+n+'</button>').join('')+'</div><button class="btn g" data-a="resettheme">Reset this stage</button><button class="btn g" data-a="themeall">Copy to all stages</button><button class="btn g" data-a="go" data-i="backup">Backup</button><button class="btn" data-a="restart">Restart day</button><button class="btn g" data-a="skipall">Complete all lists</button></div>':'');
+const behind=()=>rk()>dk();
+function tryAdvance(){if(!behind()||!dayEnded()||document.body.classList.contains('gn'))return false;S.activeDay=rk();save();wasEnded=null;roomDay=dk();calSel=dk();const a=adate();calY=a.getFullYear();calM=a.getMonth();V={v:'menu'};msg='';render();showNd();return true}
+let ndT=null;
+function fillNd(){const n=NOW();$('#ndt').textContent=n.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});$('#ndd').textContent=adate().toLocaleDateString([],{weekday:'long',year:'numeric',month:'long',day:'numeric'});$('#nde').textContent=adate().toLocaleDateString([],{weekday:'long'})+' begins. A fresh list awaits.'}
+function showNd(){fillNd();document.body.classList.add('nd');clearInterval(ndT);ndT=setInterval(()=>{if(!document.body.classList.contains('nd')){clearInterval(ndT);return}fillNd()},1000)}
+function render(){let h;const y=scrollY;const f=forced();if(f&&V.v!=='backup'&&!(V.v==='list'&&(V.id===f||lst(V.id).complete)))V={v:'list',id:f};if(homeBusy()&&V.v!=='backup'&&!(V.v==='list'&&V.id==='home'))V={v:'list',id:'home'};const {v,id,from}=V;if(v!=='lobby')starOpen=false;if(v!=='focus')ftOpen=false;
+$('#dev').innerHTML='<button class="chip" data-a="dev">Dev</button>'+(devOpen?'<div class="glass devp"><button class="chip '+(dm()?'on':'')+'" data-a="devmode">Developer mode: '+(dm()?'On':'Off')+'</button><div class="sub" style="margin:0">'+(dm()?'Plain white, no stars. Turn off to use the stage backgrounds.':'')+'</div><div class="sub" style="margin:0">Background for this stage: '+esc(stageName())+'</div><div class="bar" style="margin:0">'+[['c1','Glow 1'],['c2','Glow 2'],['c3','Glow 3'],['bg','Base']].map(([k,n])=>`<label class="pill" style="display:grid;gap:4px;justify-items:center">${n}<input type="color" data-th="${k}" value="${theme()[k]}" style="width:48px;height:34px;padding:2px"></label>`).join('')+'</div><div class="sub" style="margin:0">Layout</div><div class="chips" style="margin:0">'+[['auto','Auto'],['phone','Phone'],['wide','iPad / PC']].map(([k,n])=>'<button class="chip '+((S.ui||'auto')===k?'on':'')+'" data-a="ui" data-i="'+k+'">'+n+'</button>').join('')+'</div><button class="btn g" data-a="resettheme">Reset this stage</button><button class="btn g" data-a="themeall">Copy to all stages</button><button class="btn g" data-a="go" data-i="backup">Backup</button><div class="sub" style="margin:0">Real day simulator<br>Real date: '+NOW().toLocaleDateString(undefined,{month:'short',day:'numeric'})+(S.simOff?' (simulated '+(S.simOff>0?'+':'')+S.simOff+'d)':'')+'<br>Your day: '+adate().toLocaleDateString(undefined,{month:'short',day:'numeric'})+'</div><label class="pill" style="display:grid;gap:4px">Set real day<input type="date" data-a="simreal" value="'+rk()+'"></label><label class="pill" style="display:grid;gap:4px">Set your day<input type="date" data-a="simyour" value="'+dk()+'"></label><div class="chips" style="margin:0"><button class="chip" data-a="simday" data-i="1">Next real day +1</button><button class="chip" data-a="simday" data-i="-1">-1</button><button class="chip" data-a="simday" data-i="0">Reset to real time</button></div><button class="btn g" data-a="ndprev">Preview new day screen</button><button class="btn" data-a="restart">Restart day</button><button class="btn g" data-a="skipall">Complete all lists</button></div>':'');
 h=v==='menu'?menu():v==='list'?list(id):v==='focus'?focus():v==='lobby'?lobby():v==='room'?room(id,from):v==='journal'?journal():v==='bible'?bible():v==='backup'?backup():money();
-$('#app').className='v-'+v;$('#app').innerHTML=h;applyTheme();$('#rail').innerHTML=railHtml();renderNP();const k=v+':'+(id||'');scrollTo(0,k===lastKey?y:0);lastKey=k;checkEnd()}
+$('#app').className='v-'+v;$('#app').innerHTML=h;applyTheme();$('#rail').innerHTML=railHtml();renderNP();const k=v+':'+(id||'');scrollTo(0,k===lastKey?y:0);lastKey=k;checkEnd();if(behind()&&!dayEnded())$('#app').insertAdjacentHTML('beforeend','<p id="dayend">The day already ended. Finish your tasks to officially end your day and to start a new one.</p>')}
 render();
-$('#gn').onclick=()=>document.body.classList.remove('gn');
+$('#nd').onclick=()=>document.body.classList.remove('nd');
+$('#gn').onclick=()=>{document.body.classList.remove('gn');tryAdvance()};
 $('#lb').onclick=e=>{if(e.target.id==='lb')A.lbx()};
 document.addEventListener('change',e=>{const t=e.target.closest&&e.target.closest('#thfile');if(t){const f=t.files[0],id=t.dataset.eid;t.value='';setThumb(id,f)}});
 document.addEventListener('change',e=>{const f=e.target.closest&&e.target.closest('#bfile');if(f){addImgs(f.files).then(()=>{f.value=''})}});
